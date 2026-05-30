@@ -1,38 +1,42 @@
-# Python Starter Repository
+# Python Utility Toolkit
 
-This repository previously had no usable project code. A minimal Python starter scaffold has been added so the repository now has a runnable baseline instead of an empty placeholder.
+This repository is now a small but usable Python command-line toolkit instead of a placeholder file. It focuses on lightweight text and JSON helpers that are useful in day-to-day scripting.
 
-## Project Structure
+## Features
 
-```text
-python/
-|-- main.py
-|-- requirements.txt
-|-- .gitignore
-`-- README.md
-```
-
-## What Was Added
-
-1. `main.py`
-   A simple executable entry point with a small greeting function so the repository has a valid Python program.
-
-2. `requirements.txt`
-   Included as a placeholder for future third-party dependencies.
-
-3. `.gitignore`
-   Added common Python ignores so generated files do not pollute the repository.
-
-4. `README.md`
-   Replaced the one-line placeholder with setup and usage notes.
+- `slugify` for URL-friendly text conversion
+- `stats` for quick text metrics
+- `json-pretty` for formatted JSON output
 
 ## Run
 
 ```powershell
-python main.py
+python main.py slugify "Hello World from Python"
+python main.py stats "Python is simple and powerful"
+python main.py json-pretty sample.json
+```
+
+## Commands
+
+### Slugify
+
+```powershell
+python main.py slugify "My Portfolio Project"
+```
+
+### Text Stats
+
+```powershell
+python main.py stats "This repository is now more useful"
+```
+
+### Pretty JSON
+
+```powershell
+python main.py json-pretty data.json
 ```
 
 ## Notes
 
-- This is a starter scaffold, not a recovered original application.
-- If you tell me the intended purpose of this repository, I can turn it into a real project structure next.
+- This project is intentionally dependency-light.
+- It works well as a starter repo for Python scripting, automation, or CLI experiments.

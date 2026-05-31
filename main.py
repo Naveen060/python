@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 import re
 from collections import Counter
@@ -25,6 +26,21 @@ def pretty_json(path: Path) -> str:
     return json.dumps(content, indent=2, ensure_ascii=False, sort_keys=True)
 
 
+def file_stats(path: Path) -> dict:
+    text = path.read_text(encoding="utf-8")
+    words = re.findall(r"\b[\w']+\b", text)
+    return {
+        "path": str(path),
+        "characters": len(text),
+        "lines": len(text.splitlines()),
+        "words": len(words),
+    }
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def build_parser():
     parser = argparse.ArgumentParser(
         description="A small Python productivity toolkit for common text and JSON tasks."
@@ -40,6 +56,12 @@ def build_parser():
     json_parser = subparsers.add_parser("json-pretty", help="Pretty-print a JSON file.")
     json_parser.add_argument("path", type=Path)
 
+    file_stats_parser = subparsers.add_parser("file-stats", help="Generate quick stats for a text file.")
+    file_stats_parser.add_argument("path", type=Path)
+
+    hash_parser = subparsers.add_parser("sha256", help="Generate a SHA-256 hash for a file.")
+    hash_parser.add_argument("path", type=Path)
+
     return parser
 
 
@@ -54,6 +76,10 @@ def main():
         print(json.dumps(result, indent=2))
     elif args.command == "json-pretty":
         print(pretty_json(args.path))
+    elif args.command == "file-stats":
+        print(json.dumps(file_stats(args.path), indent=2))
+    elif args.command == "sha256":
+        print(sha256_file(args.path))
 
 
 if __name__ == "__main__":

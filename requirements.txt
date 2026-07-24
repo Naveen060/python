@@ -1,1 +1,2 @@
-# No external dependencies required
+# No runtime dependencies required
+pytest>=9.1,<10.0
